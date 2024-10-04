@@ -5,14 +5,14 @@
 int main() {
   lista_encadeada lst = criar_lista();
 
-  insere_valor(lst, 123);
+  insere_valor(lst, 111);
   mostrar_lista(lst);
-  insere_valor(lst, 321);
+  insere_valor(lst, 21);
   mostrar_lista(lst);
-  insere_valor(lst, 333);
+  insere_valor(lst, 777);
   mostrar_lista(lst);
 
-  apaga_valor(lst, 333);
+  apaga_valor(lst, 21);
   mostrar_lista(lst);
 
   apaga_lista(lst);
