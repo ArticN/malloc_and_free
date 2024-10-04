@@ -1,89 +1,92 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "lista_encadeada.h"
+#include "memoria.h"
 
-Node pool_memoria[MAX_NOS];
-int espacos_livres[MAX_NOS];
-int head = -1;
-
-int alocar_no() {
-    for (int i = 0; i < MAX_NOS; i++) {
-        if (espacos_livres[i] == 0) {
-            espacos_livres[i] = 1;
-            return i;
-        }
-    }
-    return -1;
+lista_encadeada criar_lista() {
+  return (lista_encadeada)aloca_mem(sizeof(struct lista_enc));
 }
 
-void liberar_no(int indice) {
-    if (indice >= 0 && indice < MAX_NOS) {
-        espacos_livres[indice] = 0;
+void apaga_lista(lista_encadeada lst) {
+  no temp;
+
+  while (lst->head != NULL) {
+      temp = lst->head;
+      lst->head = lst->head->next;
+      libera_mem(temp);
     }
+
+  libera_mem(lst);
 }
 
-void adicionar_no(int valor) {
-    int indice_novo_no = alocar_no();
-    if (indice_novo_no == -1) {
-        printf("Erro: Memória insuficiente!\n");
-        return;
-    }
+void insere_valor(lista_encadeada lst, int value) {
+no n = (no)aloca_mem(sizeof(struct no_data));
+    n->value = value;
+    n->next = NULL;
 
-    pool_memoria[indice_novo_no].valor = valor;
-    pool_memoria[indice_novo_no].prox = -1;
-
-    if (head == -1) {
-        head = indice_novo_no;
+    if (lst->head == NULL) {
+        n->prev = NULL;
+        lst->head = n;
     } else {
-        int temp = head;
-        while (pool_memoria[temp].prox != -1) {
-            temp = pool_memoria[temp].prox;
+        no temp = lst->head;
+
+        while (temp->next != NULL) {
+            temp = temp->next;
         }
-        pool_memoria[temp].prox = indice_novo_no;
+
+        temp->next = n;
+        n->prev = temp;
     }
 }
 
-void remover_no(int valor) {
-    if (head == -1) {
-        printf("A lista está vazia.\n");
-        return;
+void mostrar_lista(lista_encadeada lst) {
+    no temp = lst->head;
+
+    printf("lista:");
+    while (temp != NULL) {
+        if (temp->next == NULL) {
+            printf(" %d", temp->value);
+        } else {
+            printf(" %d <-->", temp->value);
+        } 
+        temp = temp->next;
     }
-
-    int temp = head;
-    int prev = -1;
-
-    if (pool_memoria[temp].valor == valor) {
-        head = pool_memoria[temp].prox;
-        liberar_no(temp);
-        return;
-    }
-
-    while (temp != -1 && pool_memoria[temp].valor != valor) {
-        prev = temp;
-        temp = pool_memoria[temp].prox;
-    }
-
-    if (temp == -1) {
-        printf("Valor %d não encontrado na lista.\n", valor);
-        return;
-    }
-
-    pool_memoria[prev].prox = pool_memoria[temp].prox;
-    liberar_no(temp);
+    printf("\n");
 }
 
-void mostrar_lista() {
-    int temp = head;
-    while (temp != -1) {
-        printf("%d -> ", pool_memoria[temp].valor);
-        temp = pool_memoria[temp].prox;
+no remove_valor(lista_encadeada lst, int value) {
+    no n = procura_no(lst, value);
+
+    if (n == NULL) {
+        printf("Valor %d não encontrado\n", value);
+        return NULL;
     }
-    printf("NULL\n");
+
+    if (n->prev != NULL) {
+        n->prev->next = n->next;
+    } else {
+        lst->head = n->next;
+    }
+
+    if (n->next != NULL) {
+        n->next->prev = n->prev;
+    }
+
+    return n;   
 }
 
-void limpar_lista() {
-    while (head != -1) {
-        int temp = head;
-        head = pool_memoria[head].prox;
-        liberar_no(temp);
-    }
+void apaga_valor(lista_encadeada lst, int value) {
+ no n = remove_valor(lst, value);
+
+  if (n != NULL) {
+      libera_mem(n); 
+  }
+}
+
+no procura_no(lista_encadeada lst, int value) {
+  no current = lst->head;
+  while (current != NULL && current->value != value) {
+    current = current->next;
+  }
+  return current;
 }

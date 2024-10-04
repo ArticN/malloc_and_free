@@ -1,29 +1,22 @@
 #include <stdio.h>
 #include "lista_encadeada.h"
+#include "memoria.h"
 
 int main() {
+  lista_encadeada lst = criar_lista();
 
-    for (int i = 0; i < MAX_NOS; i++) {
-        espacos_livres[i] = 0;
-    }
+  insere_valor(lst, 123);
+  mostrar_lista(lst);
+  insere_valor(lst, 321);
+  mostrar_lista(lst);
+  insere_valor(lst, 333);
+  mostrar_lista(lst);
 
-    adicionar_no(10);
-    adicionar_no(20);
-    adicionar_no(30);
-    adicionar_no(40);
+  apaga_valor(lst, 333);
+  mostrar_lista(lst);
 
-    printf("Lista encadeada: ");
-    mostrar_lista();
-    printf("------------------------\n");
+  apaga_lista(lst);
+  mostrar_lista(lst);
 
-    remover_no(20);
-    printf("Lista apos remover o valor 20: \n");
-    mostrar_lista();
-    printf("------------------------\n");
-
-    limpar_lista();
-    printf("Lista apos ser completamente limpa: \n");
-    mostrar_lista();
-
-    return 0;
+  return 0;
 }
