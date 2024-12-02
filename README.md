@@ -27,7 +27,7 @@ O projeto é composto pelos seguintes arquivos:
 ├── lista_encadeada.h    // Declarações das estruturas e funções da lista encadeada.
 ├── memoria.c             // Implementação das funções de gestão de memória.
 ├── memoria.h             // Declarações das funções de gestão de memória.
-└── programa.c            // Arquivo principal que demonstra o uso da lista encadeada.
+└── main.c            // Arquivo principal que demonstra o uso da lista encadeada.
 ```
 
 ## Como Compilar e Executar
@@ -35,7 +35,7 @@ O projeto é composto pelos seguintes arquivos:
 Para compilar o projeto, você pode usar o compilador `gcc`. Execute os seguintes comandos no terminal:
 
 ```bash
-gcc -o <nome_do_exe> programa.c lista_encadeada.c memoria.c
+gcc -o <nome_do_exe> main.c lista_encadeada.c memoria.c
 ```
 
 Para executar o programa, use:
@@ -82,7 +82,7 @@ Esta estrutura representa a lista encadeada em si. Ela contém um único campo:
 
 ## Uso
 
-O programa principal (`programa.c`) demonstra como criar uma lista encadeada, adicionar valores, exibir a lista, remover valores e liberar a memória. Os resultados são exibidos no terminal.
+O programa principal (`main.c`) demonstra como criar uma lista encadeada, adicionar valores, exibir a lista, remover valores e liberar a memória. Os resultados são exibidos no terminal.
 
 Exemplo de uso:
 
