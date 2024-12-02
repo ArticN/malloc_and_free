@@ -11,9 +11,6 @@ Este projeto implementa uma lista encadeada em C, com funcionalidades para criar
   - [Estruturas de Dados](#estruturas-de-dados)
     - [`struct no_data`](#struct-no_data)
     - [`struct lista_enc`](#struct-lista_enc)
-  - [Funções Implementadas](#funções-implementadas)
-    - [Funções da lista encadeada](#funções-da-lista-encadeada)
-    - [Funções de gestão de memória](#funções-de-gestão-de-memória)
   - [Uso](#uso)
 
 
@@ -61,24 +58,6 @@ Esta estrutura representa um nó da lista encadeada. Ela contém os seguintes ca
 Esta estrutura representa a lista encadeada em si. Ela contém um único campo:
 
 - `no head`: ponteiro para o primeiro nó da lista.
-
-## Funções Implementadas
-
-### Funções da lista encadeada
-
-- **`lista_encadeada criar_lista()`**: Cria e inicializa uma nova lista encadeada.
-- **`void apaga_lista(lista_encadeada lst)`**: Remove todos os nós da lista e libera a memória utilizada.
-- **`void insere_valor(lista_encadeada lst, int v)`**: Insere um novo nó contendo um valor inteiro no final da lista.
-- **`void mostrar_lista(lista_encadeada lst)`**: Exibe os valores armazenados na lista.
-- **`no remove_valor(lista_encadeada lst, int v)`**: Remove um nó com um valor específico da lista.
-- **`void apaga_valor(lista_encadeada lst, no n)`**: Remove um nó específico da lista e libera a memória.
-- **`no procura_no(lista_encadeada lst, int v)`**: Busca um nó com um valor específico e retorna o nó encontrado.
-
-### Funções de gestão de memória
-
-- **`byte* aloca_mem(byte s)`**: Aloca memória da área global.
-- **`void libera_mem(void* addrs)`**: Libera a memória alocada em um endereço específico.
-- **`bool ESPACO_VALIDO(int inicio, int fim)`**: Identifica se há espaço livre dado onde começa e onde termina.
 
 ## Uso
 
