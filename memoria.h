@@ -4,11 +4,10 @@
 #include <stdbool.h>
 #define TAMANHO_MAXIMO 8192
 
-typedef unsigned char ident;
+typedef unsigned char byte;
 
-ident* aloca_mem(ident size);
-
-void libera_mem(void*);
-bool ESPACO_VALIDO(int strt, int end);
+byte* memoria_alocar(byte tamanho);
+void memoria_liberar(void* endereco);
+bool espaco_disponivel(int inicio, int fim);
 
 #endif

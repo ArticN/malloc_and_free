@@ -3,20 +3,19 @@
 #include "memoria.h"
 
 int main() {
-  lista_encadeada lst = criar_lista();
+    lista* minha_lista = nova_lista();
 
-  insere_valor(lst, 111);
-  mostrar_lista(lst);
-  insere_valor(lst, 21);
-  mostrar_lista(lst);
-  insere_valor(lst, 777);
-  mostrar_lista(lst);
+    lista_inserir(minha_lista, 10);
+    lista_exibir(minha_lista);
+    lista_inserir(minha_lista, 20);
+    lista_exibir(minha_lista);
+    lista_inserir(minha_lista, 30);
+    lista_exibir(minha_lista);
 
-  apaga_valor(lst, 21);
-  mostrar_lista(lst);
+    lista_apagar_valor(minha_lista, 20);
+    lista_exibir(minha_lista);
 
-  apaga_lista(lst);
-  mostrar_lista(lst);
+    lista_apagar(minha_lista);
 
-  return 0;
+    return 0;
 }

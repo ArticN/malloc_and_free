@@ -3,90 +3,86 @@
 #include "lista_encadeada.h"
 #include "memoria.h"
 
-lista_encadeada criar_lista() {
-  return (lista_encadeada)aloca_mem(sizeof(struct lista_enc));
+lista* nova_lista() {
+    return (lista*)memoria_alocar(sizeof(lista));
 }
 
-void apaga_lista(lista_encadeada lst) {
-  no temp;
+void lista_apagar(lista* lst) {
+    nodo* atual;
 
-  while (lst->head != NULL) {
-      temp = lst->head;
-      lst->head = lst->head->next;
-      libera_mem(temp);
+    while (lst->inicio != NULL) {
+        atual = lst->inicio;
+        lst->inicio = lst->inicio->proximo;
+        memoria_liberar(atual);
     }
 
-  libera_mem(lst);
+    memoria_liberar(lst);
 }
 
-void insere_valor(lista_encadeada lst, int value) {
-no n = (no)aloca_mem(sizeof(struct no_data));
-    n->value = value;
-    n->next = NULL;
+void lista_inserir(lista* lst, int valor) {
+    nodo* novo = (nodo*)memoria_alocar(sizeof(nodo));
+    novo->dado = valor;
+    novo->proximo = NULL;
 
-    if (lst->head == NULL) {
-        n->prev = NULL;
-        lst->head = n;
+    if (lst->inicio == NULL) {
+        novo->anterior = NULL;
+        lst->inicio = novo;
     } else {
-        no temp = lst->head;
+        nodo* temp = lst->inicio;
 
-        while (temp->next != NULL) {
-            temp = temp->next;
+        while (temp->proximo != NULL) {
+            temp = temp->proximo;
         }
 
-        temp->next = n;
-        n->prev = temp;
+        temp->proximo = novo;
+        novo->anterior = temp;
     }
 }
 
-void mostrar_lista(lista_encadeada lst) {
-    no temp = lst->head;
+void lista_exibir(lista* lst) {
+    nodo* atual = lst->inicio;
 
-    printf("lista:");
-    while (temp != NULL) {
-        if (temp->next == NULL) {
-            printf(" %d", temp->value);
-        } else {
-            printf(" %d <-->", temp->value);
-        } 
-        temp = temp->next;
+    printf("Lista:");
+    while (atual != NULL) {
+        printf(" %d%s", atual->dado, (atual->proximo ? " <-->" : ""));
+        atual = atual->proximo;
     }
     printf("\n");
 }
 
-no remove_valor(lista_encadeada lst, int value) {
-    no n = procura_no(lst, value);
+nodo* lista_remover(lista* lst, int valor) {
+    nodo* alvo = lista_buscar(lst, valor);
 
-    if (n == NULL) {
-        printf("Valor %d não encontrado\n", value);
+    if (alvo == NULL) {
+        printf("Valor %d não encontrado\n", valor);
         return NULL;
     }
 
-    if (n->prev != NULL) {
-        n->prev->next = n->next;
+    if (alvo->anterior != NULL) {
+        alvo->anterior->proximo = alvo->proximo;
     } else {
-        lst->head = n->next;
+        lst->inicio = alvo->proximo;
     }
 
-    if (n->next != NULL) {
-        n->next->prev = n->prev;
+    if (alvo->proximo != NULL) {
+        alvo->proximo->anterior = alvo->anterior;
     }
 
-    return n;   
+    return alvo;
 }
 
-void apaga_valor(lista_encadeada lst, int value) {
- no n = remove_valor(lst, value);
+void lista_apagar_valor(lista* lst, int valor) {
+    nodo* removido = lista_remover(lst, valor);
 
-  if (n != NULL) {
-      libera_mem(n); 
-  }
+    if (removido != NULL) {
+        memoria_liberar(removido);
+    }
 }
 
-no procura_no(lista_encadeada lst, int value) {
-  no current = lst->head;
-  while (current != NULL && current->value != value) {
-    current = current->next;
-  }
-  return current;
+nodo* lista_buscar(lista* lst, int valor) {
+    nodo* atual = lst->inicio;
+    while (atual != NULL && atual->dado != valor) {
+        atual = atual->proximo;
+    }
+    return atual;
 }

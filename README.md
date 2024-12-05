@@ -1,83 +1,69 @@
-# Lista Encadeada em C
 
-Este projeto implementa uma lista encadeada em C, com funcionalidades para criar, manipular e exibir uma lista. O objetivo deste projeto é demonstrar conceitos gestão de memória.
+# Projeto de Lista Encadeada com Gerenciamento de Memória Personalizado
 
-## Índice
-
-- [Lista Encadeada em C](#lista-encadeada-em-c)
-  - [Índice](#índice)
-  - [Estrutura do Projeto](#estrutura-do-projeto)
-  - [Como Compilar e Executar](#como-compilar-e-executar)
-  - [Estruturas de Dados](#estruturas-de-dados)
-    - [`struct no_data`](#struct-no_data)
-    - [`struct lista_enc`](#struct-lista_enc)
-  - [Uso](#uso)
-
+Este projeto implementa uma lista duplamente encadeada utilizando um gerenciador de memória personalizado que simula o comportamento das funções `malloc` e `free` da linguagem C. 
 
 ## Estrutura do Projeto
 
 O projeto é composto pelos seguintes arquivos:
 
-```
-.
-├── lista_encadeada.c    // Implementação das funções da lista encadeada.
-├── lista_encadeada.h    // Declarações das estruturas e funções da lista encadeada.
-├── memoria.c             // Implementação das funções de gestão de memória.
-├── memoria.h             // Declarações das funções de gestão de memória.
-└── main.c            // Arquivo principal que demonstra o uso da lista encadeada.
-```
+- **`main.c`**: Contém a função principal para testar as funcionalidades da lista encadeada.
+- **`lista_encadeada.c`**: Implementa as operações de gerenciamento e manipulação da lista encadeada.
+- **`lista_encadeada.h`**: Declarações das funções e tipos utilizados na lista encadeada.
+- **`memoria.c`**: Implementa um gerenciador de memória personalizado.
+- **`memoria.h`**: Declarações das funções e tipos relacionados ao gerenciamento de memória.
 
-## Como Compilar e Executar
+## Funcionamento do Gerenciador de Memória
 
-Para compilar o projeto, você pode usar o compilador `gcc`. Execute os seguintes comandos no terminal:
+O gerenciamento de memória neste projeto substitui o uso de `malloc` e `free` por funções customizadas:
+
+- **`memoria_alocar`**: Simula a alocação de memória. A memória é gerenciada em um vetor global de bytes (`MEMORIA`), onde os blocos disponíveis são marcados e atribuídos conforme necessário.
+- **`memoria_liberar`**: Libera a memória alocada. Os bytes utilizados são marcados como disponíveis novamente.
+- **`espaco_disponivel`**: Verifica se um intervalo de memória no vetor global está livre para alocação.
+
+### Limitações do Gerenciador de Memória
+1. **Tamanho Fixo**: O vetor global de memória tem um tamanho máximo predefinido (`8192` bytes).
+2. **Simples Marcação**: A memória alocada é precedida por um byte que indica o tamanho do bloco, permitindo rastrear e liberar a memória alocada.
+
+## Operações Disponíveis na Lista Encadeada
+
+1. **Criação da Lista**: `nova_lista()` inicializa uma lista encadeada vazia.
+2. **Inserção de Valores**: `lista_inserir(lista*, int)` adiciona um novo valor ao final da lista.
+3. **Exibição da Lista**: `lista_exibir(lista*)` exibe todos os valores presentes na lista.
+4. **Remoção de Valores**: `lista_remover(lista*, int)` remove o primeiro nó com o valor especificado.
+5. **Busca de Valores**: `lista_buscar(lista*, int)` retorna um ponteiro para o nó que contém o valor desejado.
+6. **Limpeza da Lista**: `lista_apagar(lista*)` libera todos os nós e a estrutura da lista.
+
+## Compilação e Execução
+
+Para compilar o projeto, utilize o comando:
 
 ```bash
-gcc -o <nome_do_exe> main.c lista_encadeada.c memoria.c
+gcc -o  <nome> main.c lista_encadeada.c memoria.c
 ```
 
-Para executar o programa, use:
+Após compilar, execute o programa:
 
 ```bash
-./<nome_do_exe>
+./<nome> 
 ```
 
-## Estruturas de Dados
+## Exemplos de Uso
 
-O projeto utiliza duas estruturas principais:
+A seguir, um exemplo do que acontece no programa principal:
 
-### `struct no_data`
+1. Uma lista encadeada é criada.
+2. Valores são inseridos (`10`, `20`, `30`).
+3. A lista é exibida.
+4. Um valor específico (`20`) é removido.
+5. A lista é apagada.
 
-Esta estrutura representa um nó da lista encadeada. Ela contém os seguintes campos:
+## Contribuições
 
-- `struct no_data* prev`: ponteiro para o nó anterior.
-- `int value`: valor armazenado no nó.
-- `struct no_data* next`: ponteiro para o próximo nó.
+Se desejar contribuir ou sugerir melhorias, sinta-se à vontade para abrir uma *issue* ou enviar um *pull request*.
 
-### `struct lista_enc`
+---
 
-Esta estrutura representa a lista encadeada em si. Ela contém um único campo:
+### Contato
 
-- `no head`: ponteiro para o primeiro nó da lista.
-
-## Uso
-
-O programa principal (`main.c`) demonstra como criar uma lista encadeada, adicionar valores, exibir a lista, remover valores e liberar a memória. Os resultados são exibidos no terminal.
-
-Exemplo de uso:
-
-```c
-  lista_encadeada lst = criar_lista();
-
-  insere_valor(lst, 123);
-  mostrar_lista(lst);
-  insere_valor(lst, 321);
-  mostrar_lista(lst);
-  insere_valor(lst, 333);
-  mostrar_lista(lst);
-
-  apaga_valor(lst, 333);
-  mostrar_lista(lst);
-
-  apaga_lista(lst);
-  mostrar_lista(lst);
-```
+Se precisar de ajuda ou tiver dúvidas, entre em contato! 🚀

@@ -1,25 +1,25 @@
 #ifndef LISTA_ENCADEADA_H
 #define LISTA_ENCADEADA_H
 
-typedef struct no_data {
-  struct no_data *prev;
-  int value;
-  struct no_data *next;
-} *no;
+typedef struct nodo_data {
+    struct nodo_data* anterior;
+    int dado;
+    struct nodo_data* proximo;
+} nodo;
 
-typedef struct lista_enc {
-  no head;
-} *lista_encadeada;
+typedef struct lista_data {
+    nodo* inicio;
+} lista;
 
-lista_encadeada criar_lista();
-void apaga_lista(lista_encadeada);
+lista* nova_lista();
+void lista_apagar(lista* lst);
 
-void insere_valor(lista_encadeada, int);
-void mostrar_lista(lista_encadeada);
+void lista_inserir(lista* lst, int valor);
+void lista_exibir(lista* lst);
 
-no remove_valor(lista_encadeada, int);
-void apaga_valor(lista_encadeada, int);
+nodo* lista_remover(lista* lst, int valor);
+void lista_apagar_valor(lista* lst, int valor);
 
-no procura_no(lista_encadeada, int);
+nodo* lista_buscar(lista* lst, int valor);
 
 #endif
