@@ -57,13 +57,3 @@ A seguir, um exemplo do que acontece no programa principal:
 3. A lista é exibida.
 4. Um valor específico (`20`) é removido.
 5. A lista é apagada.
-
-## Contribuições
-
-Se desejar contribuir ou sugerir melhorias, sinta-se à vontade para abrir uma *issue* ou enviar um *pull request*.
-
----
-
-### Contato
-
-Se precisar de ajuda ou tiver dúvidas, entre em contato! 🚀
