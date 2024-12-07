@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "memoria.h"
+#include "teste_memoria.h"
 
 void testar_alocacao_simples() {
     printf("Teste: Alocação Simples\n");
